@@ -19,8 +19,8 @@
             
             var message = document.getElementById('message').value;
 
-            // Send data to proxy server
-            fetch('http://localhost:3000/send-message', {
+            // Send data to Render server
+            fetch('/send-message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
