@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message to Teams</title>
+</head>
+<body>
+    <h2>Send Message to Teams</h2>
+    <form id="messageForm">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var message = document.getElementById('message').value;
+
+            // Send data to proxy server
+            fetch('http://localhost:3000/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message }) // Send the message in the 'message' field
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Message sent successfully');
+                } else {
+                    alert('Failed to send message');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+                alert('An error occurred');
+            });
+        });
+    </script>
+</body>
+</html>
